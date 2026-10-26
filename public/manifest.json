@@ -1,0 +1,31 @@
+{
+  "name": "SocialPic Shield - Phòng Tối Tối Ưu Ảnh MXH",
+  "short_name": "SocialPic",
+  "description": "Bảo toàn màu sắc tuyệt đối 100%, làm nét Luminance và chống nén mờ trên Facebook, Instagram",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0A0C",
+  "theme_color": "#0A0A0C",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "name",
+      "files": [
+        {
+          "name": "image",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  }
+}

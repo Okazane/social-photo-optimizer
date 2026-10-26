@@ -61,7 +61,7 @@ export default function TechInspector({ item, mode }: TechInspectorProps) {
         <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
           <span className="text-[10px] text-slate-400 block mb-0.5">Độ nét Luminance</span>
           <span className="font-semibold text-teal-300 block">
-            {mode === 'portrait' ? 'Nét Dịu (Mịn da)' : 'Nét Sâu Chi Tiết'}
+            {mode === 'portrait' ? 'Nét Dịu Chân Dung' : 'Nét Sâu Chi Tiết'}
           </span>
           <span className="text-[10px] text-slate-400 block mt-0.5 font-mono">
             {item.processTimeMs ? `${item.processTimeMs}ms • 4:4:4` : 'Chroma 4:4:4'}

@@ -229,7 +229,7 @@ export default function PresetSelector({
             </div>
             <div>
               <div className="font-bold text-xs sm:text-sm">Chân Dung / Đời Thường</div>
-              <div className="text-[10px] text-emerald-400 font-medium">Mịn da • Nét mắt &amp; tóc</div>
+              <div className="text-[10px] text-emerald-400 font-medium">Chi tiết chân dung</div>
             </div>
           </button>
 

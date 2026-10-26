@@ -126,7 +126,7 @@ export default function BottomDock({
             }`}
           >
             <User className="w-3.5 h-3.5" />
-            <span>Chân dung (Mịn da)</span>
+            <span>Chân dung</span>
           </button>
 
           {/* Phong cảnh */}
@@ -140,7 +140,7 @@ export default function BottomDock({
             }`}
           >
             <Mountain className="w-3.5 h-3.5" />
-            <span>Phong cảnh (Bén nét)</span>
+            <span>Phong cảnh</span>
           </button>
         </div>
 

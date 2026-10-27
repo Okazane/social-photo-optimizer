@@ -40,7 +40,7 @@ export default function Header({
       <div className="max-w-6xl mx-auto px-4 h-full flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)] flex items-center justify-center text-[var(--color-accent)]">
+          <div className="w-7 h-7 rounded border border-[var(--color-rule)] bg-[var(--color-paper-hi)] flex items-center justify-center text-[var(--color-accent)] shadow-xs">
             <Shield className="w-3.5 h-3.5" />
           </div>
           <span className="font-semibold text-sm tracking-tight text-[var(--color-ink)] flex items-center gap-1.5">
@@ -56,8 +56,8 @@ export default function Header({
             onClick={() => setIsOpen(!isOpen)}
             className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-2 border transition-colors duration-150 ${
               isCurrentlyP3
-                ? 'bg-[var(--color-paper-2)] text-[var(--color-accent)] border-[var(--color-rule)] hover:border-[var(--color-accent)]'
-                : 'bg-[var(--color-paper-2)] text-[var(--color-ink)] border-[var(--color-rule)] hover:border-[var(--color-muted)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] border-[var(--color-rule-2)] hover:border-[var(--color-accent)] shadow-xs'
+                : 'bg-[var(--color-paper-hi)] text-[var(--color-ink)] border-[var(--color-rule)] hover:border-[var(--color-muted)] shadow-xs'
             }`}
             title="Thay đổi chuẩn màu thẻ ảnh"
           >
@@ -76,7 +76,7 @@ export default function Header({
 
           {/* Dropdown Menu */}
           {isOpen && (
-            <div className="absolute right-0 top-full mt-1 w-64 rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)] p-1 z-50 text-xs shadow-md animate-in fade-in duration-100 motion-reduce:animate-none">
+            <div className="absolute right-0 top-full mt-1 w-64 rounded bg-[var(--color-paper-hi)] border border-[var(--color-rule-2)] p-1 z-50 text-xs shadow-md animate-in fade-in duration-100 motion-reduce:animate-none">
               <div className="px-3 py-1.5 text-[11px] font-semibold text-[var(--color-muted)] border-b border-[var(--color-rule)] mb-1">
                 Chuẩn màu &amp; Thẻ ICC
               </div>
@@ -90,8 +90,8 @@ export default function Header({
                 }}
                 className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'auto'
-                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
-                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
+                    ? 'bg-[var(--color-paper-2)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-2)]'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -115,8 +115,8 @@ export default function Header({
                 }}
                 className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'iphone'
-                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
-                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
+                    ? 'bg-[var(--color-paper-2)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-2)]'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -138,6 +138,10 @@ export default function Header({
                 }}
                 className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'android'
+                    ? 'bg-[var(--color-paper-2)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-2)]'
+                }`}
+              >
                     ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
                     : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
                 }`}

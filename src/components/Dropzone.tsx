@@ -107,7 +107,7 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
         className={`relative w-full max-w-lg aspect-square sm:aspect-[4/3] max-h-[70vh] rounded border border-dashed transition-colors duration-150 p-6 sm:p-10 text-center flex flex-col items-center justify-center cursor-pointer group ${
           isDragOver
             ? 'border-[var(--color-accent)] bg-[var(--color-paper-2)]'
-            : 'border-[var(--color-rule)] hover:border-[var(--color-muted)] bg-[var(--color-paper-2)]'
+            : 'border-[var(--color-rule-2)] hover:border-[var(--color-accent)] bg-[var(--color-paper-hi)] shadow-sm'
         }`}
       >
         {/* Full-card Invisible Input */}

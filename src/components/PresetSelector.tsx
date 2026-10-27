@@ -54,7 +54,7 @@ export default function PresetSelector({
             onClick={() => handleTabSwitch('facebook')}
             className={`py-2 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 ${
               activeTab === 'facebook'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -68,7 +68,7 @@ export default function PresetSelector({
             onClick={() => handleTabSwitch('instagram')}
             className={`py-2 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 ${
               activeTab === 'instagram'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -84,10 +84,10 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_hd')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'fb_hd'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
@@ -103,14 +103,14 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_portrait')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'fb_portrait'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper-2)] text-[var(--color-muted)] border border-[var(--color-rule)]">
                   4:5
                 </span>
               </div>
@@ -122,14 +122,14 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_story')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'fb_story'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper-2)] text-[var(--color-muted)] border border-[var(--color-rule)]">
                   9:16
                 </span>
               </div>
@@ -143,10 +143,10 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_portrait')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'ig_portrait'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
@@ -162,14 +162,14 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_square')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'ig_square'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper-2)] text-[var(--color-muted)] border border-[var(--color-rule)]">
                   1:1
                 </span>
               </div>
@@ -181,10 +181,10 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_story')}
-              className={`p-3 rounded text-left border transition-colors duration-150 ${
+              className={`p-3 rounded text-left border transition-colors duration-150 shadow-xs ${
                 platform === 'ig_story'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">

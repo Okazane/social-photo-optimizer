@@ -194,12 +194,12 @@ export default function ComparisonViewer({
 
         {/* Badges: Left (Original) & Right (Shielded) */}
         <div className="absolute top-3 left-3 pointer-events-none z-10">
-          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-2)] text-[var(--color-muted)] border border-[var(--color-rule)]">
+          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-hi)] text-[var(--color-muted)] border border-[var(--color-rule)] shadow-xs">
             Ảnh Gốc
           </span>
         </div>
         <div className="absolute top-3 right-3 pointer-events-none z-10">
-          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-2)] text-[var(--color-accent)] border border-[var(--color-rule)] flex items-center gap-1.5">
+          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-hi)] text-[var(--color-accent)] border border-[var(--color-rule)] shadow-xs flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
             <span>Đã Bọc Khiên</span>
           </span>
@@ -216,8 +216,8 @@ export default function ComparisonViewer({
             }}
             className={`px-2.5 py-1 rounded text-[11px] font-medium flex items-center gap-1.5 border transition-colors duration-150 ${
               isLoupeActive
-                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold'
-                : 'bg-[var(--color-paper-2)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)]'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold shadow-xs'
+                : 'bg-[var(--color-paper-hi)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)] shadow-xs'
             }`}
             title="Kính lúp zoom 250% (Phím Z)"
           >
@@ -239,8 +239,8 @@ export default function ComparisonViewer({
             onPointerLeave={() => setIsPressingOriginal(false)}
             className={`px-2.5 py-1 rounded text-[11px] font-medium flex items-center gap-1.5 border transition-colors duration-150 ${
               isPressingOriginal
-                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold'
-                : 'bg-[var(--color-paper-2)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)]'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold shadow-xs'
+                : 'bg-[var(--color-paper-hi)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)] shadow-xs'
             }`}
             title="Giữ để xem ảnh gốc (Phím Space)"
           >
@@ -315,7 +315,7 @@ export default function ComparisonViewer({
 
         {/* Technical Specs Leica Pill (At Bottom of Workspace) */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none max-w-[94%]">
-          <div className="bg-[var(--color-paper-2)] border border-[var(--color-rule)] px-3 py-1 rounded text-xs font-mono tabular-nums text-[var(--color-ink)] flex items-center gap-2 whitespace-nowrap overflow-hidden text-ellipsis shadow-lg">
+          <div className="bg-[var(--color-paper-hi)] border border-[var(--color-rule)] px-3 py-1 rounded text-xs font-mono tabular-nums text-[var(--color-ink)] flex items-center gap-2 whitespace-nowrap overflow-hidden text-ellipsis shadow-xs">
             <span className="text-[var(--color-muted)]">
               Gốc: {origDimensions ? `${origDimensions.width}×${origDimensions.height}` : '...'} ({formatBytes(origSize)})
             </span>

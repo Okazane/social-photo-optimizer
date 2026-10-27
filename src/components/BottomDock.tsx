@@ -80,7 +80,7 @@ export default function BottomDock({
             onClick={() => handlePlatformClick('fb_hd')}
             className={`py-2 px-2 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 active:translate-y-px ${
               primaryPlatform === 'fb_hd'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -94,7 +94,7 @@ export default function BottomDock({
             onClick={() => handlePlatformClick('ig_feed')}
             className={`py-2 px-2 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 active:translate-y-px ${
               primaryPlatform === 'ig_feed'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -108,7 +108,7 @@ export default function BottomDock({
             onClick={() => handlePlatformClick('story')}
             className={`py-2 px-2 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 active:translate-y-px ${
               primaryPlatform === 'story'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -125,7 +125,7 @@ export default function BottomDock({
             onClick={() => handleModeClick('portrait')}
             className={`py-1.5 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 active:translate-y-px ${
               mode === 'portrait'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-ink)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -139,7 +139,7 @@ export default function BottomDock({
             onClick={() => handleModeClick('landscape')}
             className={`py-1.5 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 active:translate-y-px ${
               mode === 'landscape'
-                ? 'bg-[var(--color-paper-3)] text-[var(--color-ink)] font-semibold border border-[var(--color-rule)]'
+                ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
@@ -157,7 +157,7 @@ export default function BottomDock({
               onClick={() => handleFitStyleClick('cover')}
               className={`py-1.5 px-2 rounded text-xs font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 ${
                 fitStyle === 'cover'
-                  ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                  ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                   : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
@@ -171,7 +171,7 @@ export default function BottomDock({
               onClick={() => handleFitStyleClick('pad_black')}
               className={`py-1.5 px-2 rounded text-xs font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 ${
                 fitStyle === 'pad_black'
-                  ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                  ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                   : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
@@ -185,7 +185,7 @@ export default function BottomDock({
               onClick={() => handleFitStyleClick('pad_white')}
               className={`py-1.5 px-2 rounded text-xs font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 ${
                 fitStyle === 'pad_white'
-                  ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                  ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                   : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
@@ -199,7 +199,7 @@ export default function BottomDock({
               onClick={() => handleFitStyleClick('pad_blur')}
               className={`py-1.5 px-2 rounded text-xs font-medium flex items-center justify-center gap-1.5 transition-colors duration-150 ${
                 fitStyle === 'pad_blur'
-                  ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                  ? 'bg-[var(--color-paper-hi)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)] shadow-xs'
                   : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >

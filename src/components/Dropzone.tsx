@@ -104,13 +104,13 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
-        className={`relative w-full max-w-lg aspect-square sm:aspect-[4/3] max-h-[70vh] rounded-3xl border-2 border-dashed transition-all duration-200 p-6 sm:p-10 text-center flex flex-col items-center justify-center cursor-pointer group ${
+        className={`relative w-full max-w-lg aspect-square sm:aspect-[4/3] max-h-[70vh] rounded border border-dashed transition-colors duration-150 p-6 sm:p-10 text-center flex flex-col items-center justify-center cursor-pointer group ${
           isDragOver
-            ? 'border-blue-500 bg-blue-500/10 scale-[1.01] shadow-2xl shadow-blue-500/20'
-            : 'border-white/10 hover:border-white/20 bg-[#121216]/60 hover:bg-[#121216]'
+            ? 'border-[var(--color-accent)] bg-[var(--color-paper-2)]'
+            : 'border-[var(--color-rule)] hover:border-[var(--color-muted)] bg-[var(--color-paper-2)]'
         }`}
       >
-        {/* Full-card Invisible Input: Tapping anywhere triggers native library picker */}
+        {/* Full-card Invisible Input */}
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp,image/*"
@@ -125,26 +125,26 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
 
         {/* Hero Icon */}
         <div className="relative mb-4 z-10 pointer-events-none">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-xl shadow-blue-500/25 group-hover:scale-105 transition-transform duration-200">
-            <UploadCloud className="w-8 h-8 sm:w-10 sm:h-10" />
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded border border-[var(--color-rule)] bg-[var(--color-paper)] flex items-center justify-center text-[var(--color-accent)] transition-transform duration-150 group-hover:scale-105">
+            <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-xs shadow-md border-2 border-[#121216]">
-            <Plus className="w-3.5 h-3.5" />
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-ink)] flex items-center justify-center font-bold text-xs shadow">
+            <Plus className="w-3 h-3" />
           </div>
         </div>
 
         {/* Title & Tagline */}
-        <h3 className="text-base sm:text-xl font-extrabold text-white mb-1 tracking-tight z-10 pointer-events-none">
-          {isDragOver ? 'Thả ảnh vào đây' : 'Chạm để chọn hoặc kéo thả ảnh'}
+        <h3 className="text-base sm:text-lg font-semibold text-[var(--color-ink)] mb-1 tracking-tight z-10 pointer-events-none">
+          {isDragOver ? 'Thả ảnh vào đây' : 'Chọn hoặc kéo thả ảnh cần tối ưu'}
         </h3>
-        <p className="text-xs sm:text-sm text-slate-400 mb-5 max-w-xs z-10 pointer-events-none">
-          Khóa chuẩn màu OLED &amp; làm nét L* chống nén khi đăng Facebook, Instagram
+        <p className="text-xs sm:text-sm text-[var(--color-muted)] mb-5 max-w-xs z-10 pointer-events-none">
+          Khóa chuẩn màu Display P3 / sRGB và làm nét L* cho Facebook, Instagram
         </p>
 
         {/* Action Buttons */}
         <div className="w-full max-w-xs flex flex-col gap-2 z-10">
-          {/* Nút 1: Thư Viện Ảnh (NATIVE LABEL) */}
-          <label className="w-full min-h-[46px] px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 active:scale-98 transition-all cursor-pointer">
+          {/* Nút 1: Thư Viện Ảnh (NATIVE LABEL) - Amber Safelight Accent */}
+          <label className="w-full min-h-[44px] px-5 py-2.5 rounded bg-[var(--color-accent)] hover:brightness-105 text-[var(--color-accent-ink)] font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 active:translate-y-px transition-colors duration-150 cursor-pointer">
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp,image/*"
@@ -156,7 +156,7 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
               }}
             />
             <ImageIcon className="w-4 h-4" />
-            <span>Mở Thư Viện Ảnh</span>
+            <span className="whitespace-nowrap">Mở thư viện ảnh</span>
           </label>
 
           <div className="grid grid-cols-2 gap-2">
@@ -164,14 +164,14 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
             <button
               type="button"
               onClick={handlePasteClick}
-              className="min-h-[42px] px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/10 active:scale-98 transition-all"
+              className="min-h-[40px] px-3 py-2 rounded bg-[var(--color-paper)] hover:bg-[var(--color-paper-3)] text-[var(--color-ink)] font-medium text-xs flex items-center justify-center gap-1.5 border border-[var(--color-rule)] active:translate-y-px transition-colors duration-150"
             >
-              <Clipboard className="w-3.5 h-3.5 text-blue-400" />
-              <span>{isPasting ? 'Đang đọc...' : 'Dán ảnh (Ctrl+V)'}</span>
+              <Clipboard className="w-3.5 h-3.5 text-[var(--color-muted)]" />
+              <span className="whitespace-nowrap">{isPasting ? 'Đang đọc...' : 'Dán ảnh (Ctrl+V)'}</span>
             </button>
 
             {/* Nút 3: Camera */}
-            <label className="min-h-[42px] px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/10 active:scale-98 transition-all cursor-pointer">
+            <label className="min-h-[40px] px-3 py-2 rounded bg-[var(--color-paper)] hover:bg-[var(--color-paper-3)] text-[var(--color-ink)] font-medium text-xs flex items-center justify-center gap-1.5 border border-[var(--color-rule)] active:translate-y-px transition-colors duration-150 cursor-pointer">
               <input
                 type="file"
                 accept="image/*"
@@ -182,22 +182,17 @@ export default function Dropzone({ onFilesSelected, disabled = false }: Dropzone
                   e.target.value = '';
                 }}
               />
-              <Camera className="w-3.5 h-3.5 text-pink-400" />
-              <span>Chụp ảnh mới</span>
+              <Camera className="w-3.5 h-3.5 text-[var(--color-muted)]" />
+              <span className="whitespace-nowrap">Chụp ảnh mới</span>
             </label>
           </div>
         </div>
 
-        {/* Feature badges */}
-        <div className="mt-5 flex items-center justify-center gap-2 text-[10px] text-slate-400 font-mono z-10 pointer-events-none">
-          <span className="flex items-center gap-1">
-            <Sparkles className="w-2.5 h-2.5 text-emerald-400" />
-            Display P3 / sRGB Lock
-          </span>
-          <span>•</span>
-          <span>Lanczos3 Sinc</span>
-          <span>•</span>
-          <span>MozJPEG 4:4:4</span>
+        {/* Feature technical specs */}
+        <div className="mt-5 flex items-center justify-center divide-x divide-[var(--color-rule)] text-[11px] text-[var(--color-muted)] z-10 pointer-events-none">
+          <span className="px-2.5">Display P3 / sRGB</span>
+          <span className="px-2.5">Lanczos3 Sinc</span>
+          <span className="px-2.5">MozJPEG 4:4:4</span>
         </div>
       </div>
     </div>

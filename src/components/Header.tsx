@@ -33,22 +33,19 @@ export default function Header({
     };
   }, [isOpen]);
 
-  // Compute label and color styling for badge
   const isCurrentlyP3 = deviceProfile === 'iphone' || (deviceProfile === 'auto' && detectedIsIos);
 
   return (
-    <header className="w-full shrink-0 h-13 border-b border-white/[0.08] bg-[#0A0A0C]/90 backdrop-blur-xl z-30 select-none">
-      <div className="max-w-6xl mx-auto px-3.5 h-full flex items-center justify-between">
+    <header className="w-full shrink-0 h-13 border-b border-[var(--color-rule)] bg-[var(--color-paper)] z-30 select-none">
+      <div className="max-w-6xl mx-auto px-4 h-full flex items-center justify-between">
         {/* Brand */}
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)] flex items-center justify-center text-[var(--color-accent)]">
             <Shield className="w-3.5 h-3.5" />
           </div>
-          <span className="font-extrabold text-sm tracking-tight text-white flex items-center gap-1">
-            SocialPic
-            <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
-              Shield
-            </span>
+          <span className="font-semibold text-sm tracking-tight text-[var(--color-ink)] flex items-center gap-1.5">
+            <span>SocialPic</span>
+            <span className="text-[var(--color-accent)] font-medium">Shield</span>
           </span>
         </div>
 
@@ -57,31 +54,31 @@ export default function Header({
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1.5 transition-all border ${
+            className={`px-3 py-1 rounded text-xs font-medium flex items-center gap-2 border transition-colors duration-150 ${
               isCurrentlyP3
-                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20'
-                : 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
+                ? 'bg-[var(--color-paper-2)] text-[var(--color-accent)] border-[var(--color-rule)] hover:border-[var(--color-accent)]'
+                : 'bg-[var(--color-paper-2)] text-[var(--color-ink)] border-[var(--color-rule)] hover:border-[var(--color-muted)]'
             }`}
-            title="Nhấp để thay đổi chế độ nhận diện thiết bị"
+            title="Thay đổi chuẩn màu thẻ ảnh"
           >
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-current" />
-            <span>
+            <Smartphone className="w-3 h-3 text-[var(--color-accent)]" />
+            <span className="tabular-nums">
               {deviceProfile === 'auto' ? (
-                detectedIsIos ? '✨ Tự động: 🍏 iPhone (P3)' : '✨ Tự động: 🤖 Android (sRGB)'
+                detectedIsIos ? 'Tự động: iPhone (P3)' : 'Tự động: Android (sRGB)'
               ) : deviceProfile === 'iphone' ? (
-                '🍏 Chuẩn iPhone (P3)'
+                'iPhone (Display P3)'
               ) : (
-                '🤖 Chuẩn Android (sRGB)'
+                'Android (sRGB)'
               )}
             </span>
-            <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-3 h-3 text-[var(--color-muted)] transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {/* Dropdown Menu */}
           {isOpen && (
-            <div className="absolute right-0 top-full mt-1.5 w-60 rounded-2xl bg-[#18181C] border border-white/10 shadow-2xl p-1.5 z-50 text-xs animate-in fade-in slide-in-from-top-2 duration-150">
-              <div className="px-2.5 py-1.5 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                Khóa chuẩn màu &amp; Thẻ ICC
+            <div className="absolute right-0 top-full mt-1 w-64 rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)] p-1 z-50 text-xs shadow-md animate-in fade-in duration-100 motion-reduce:animate-none">
+              <div className="px-3 py-1.5 text-[11px] font-semibold text-[var(--color-muted)] border-b border-[var(--color-rule)] mb-1">
+                Chuẩn màu &amp; Thẻ ICC
               </div>
 
               {/* Option 1: Auto */}
@@ -91,22 +88,22 @@ export default function Header({
                   onDeviceProfileChange('auto');
                   setIsOpen(false);
                 }}
-                className={`w-full px-2.5 py-2 rounded-xl flex items-center justify-between text-left transition-colors ${
+                className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'auto'
-                    ? 'bg-blue-600/20 text-blue-400 font-bold'
-                    : 'text-slate-300 hover:bg-white/5'
+                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <Smartphone className="w-3.5 h-3.5 text-blue-400" />
+                  <Smartphone className="w-3.5 h-3.5 text-[var(--color-accent)]" />
                   <div>
                     <div>Tự động nhận diện</div>
-                    <div className="text-[10px] text-slate-400">
-                      {detectedIsIos ? 'Phát hiện iPhone (Display P3)' : 'Phát hiện Android / Web (sRGB)'}
+                    <div className="text-[11px] text-[var(--color-muted)]">
+                      {detectedIsIos ? 'Khóa Display P3 (Apple)' : 'Khóa sRGB IEC61966-2.1'}
                     </div>
                   </div>
                 </div>
-                {deviceProfile === 'auto' && <Check className="w-3.5 h-3.5 text-blue-400" />}
+                {deviceProfile === 'auto' && <Check className="w-3.5 h-3.5 text-[var(--color-accent)]" />}
               </button>
 
               {/* Option 2: iPhone P3 */}
@@ -116,20 +113,20 @@ export default function Header({
                   onDeviceProfileChange('iphone');
                   setIsOpen(false);
                 }}
-                className={`w-full px-2.5 py-2 rounded-xl flex items-center justify-between text-left transition-colors ${
+                className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'iphone'
-                    ? 'bg-emerald-600/20 text-emerald-400 font-bold'
-                    : 'text-slate-300 hover:bg-white/5'
+                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-sm">🍏</span>
+                  <Smartphone className="w-3.5 h-3.5 text-[var(--color-accent)]" />
                   <div>
                     <div>Chuẩn iPhone (Display P3)</div>
-                    <div className="text-[10px] text-emerald-400/80">Bảo tồn 100% màu rộng OLED</div>
+                    <div className="text-[11px] text-[var(--color-muted)]">Bảo toàn 100% màu rộng OLED</div>
                   </div>
                 </div>
-                {deviceProfile === 'iphone' && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+                {deviceProfile === 'iphone' && <Check className="w-3.5 h-3.5 text-[var(--color-accent)]" />}
               </button>
 
               {/* Option 3: Android sRGB */}
@@ -139,20 +136,20 @@ export default function Header({
                   onDeviceProfileChange('android');
                   setIsOpen(false);
                 }}
-                className={`w-full px-2.5 py-2 rounded-xl flex items-center justify-between text-left transition-colors ${
+                className={`w-full px-3 py-2 rounded flex items-center justify-between text-left transition-colors duration-150 whitespace-nowrap ${
                   deviceProfile === 'android'
-                    ? 'bg-amber-600/20 text-amber-400 font-bold'
-                    : 'text-slate-300 hover:bg-white/5'
+                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-sm">🤖</span>
+                  <Monitor className="w-3.5 h-3.5 text-[var(--color-muted)]" />
                   <div>
                     <div>Chuẩn Android (sRGB)</div>
-                    <div className="text-[10px] text-amber-400/80">LittleCMS IEC61966-2.1</div>
+                    <div className="text-[11px] text-[var(--color-muted)]">Quy đổi LittleCMS sRGB</div>
                   </div>
                 </div>
-                {deviceProfile === 'android' && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                {deviceProfile === 'android' && <Check className="w-3.5 h-3.5 text-[var(--color-accent)]" />}
               </button>
             </div>
           )}

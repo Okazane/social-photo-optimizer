@@ -2,15 +2,14 @@
 
 import React from 'react';
 import { ImageItem } from '@/types/optimizer';
-import { CheckCircle2, Loader2, AlertCircle, Trash2, Plus, Sparkles, Archive } from 'lucide-react';
+import { Plus, X, Check, AlertCircle, RefreshCw, Archive, Play } from 'lucide-react';
 
 interface BatchQueueProps {
   items: ImageItem[];
   activeIndex: number;
   onSelectIndex: (index: number) => void;
   onRemoveItem: (id: string) => void;
-  onAddMore?: () => void;
-  onAddFiles?: (files: File[]) => void;
+  onAddFiles: (files: File[]) => void;
   isProcessingBatch: boolean;
   batchProgress: { current: number; total: number; percent: number; message: string };
   onStartBatch: () => void;
@@ -23,7 +22,6 @@ export default function BatchQueue({
   activeIndex,
   onSelectIndex,
   onRemoveItem,
-  onAddMore,
   onAddFiles,
   isProcessingBatch,
   batchProgress,
@@ -31,160 +29,150 @@ export default function BatchQueue({
   onDownloadZip,
   disabled = false,
 }: BatchQueueProps) {
-  const completedCount = items.filter((it) => it.status === 'done').length;
   const pendingCount = items.filter((it) => it.status === 'idle' || it.status === 'error').length;
+  const doneCount = items.filter((it) => it.status === 'done').length;
 
   return (
-    <div className="w-full glass-panel rounded-3xl p-4 sm:p-5 space-y-4 shadow-xl">
-      {/* Top Header Row */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <span className="text-xs sm:text-sm font-extrabold text-white">
-            Hàng đợi ảnh ({items.length})
+    <div className="w-full rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)] p-3 space-y-3 select-none">
+      {/* Header bar */}
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-[var(--color-ink)]">
+            Hàng đợi tối ưu ({items.length} ảnh)
           </span>
-          <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono font-medium border border-slate-700">
-            {completedCount}/{items.length} hoàn thành
-          </span>
+          {doneCount > 0 && (
+            <span className="text-[11px] px-2 py-0.5 rounded bg-[var(--color-paper-3)] text-[var(--color-accent)] font-medium tabular-nums border border-[var(--color-rule)]">
+              {doneCount}/{items.length} hoàn thành
+            </span>
+          )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2">
-          {pendingCount > 0 && !isProcessingBatch && (
+        {/* Global actions */}
+        <div className="flex items-center gap-1.5">
+          {pendingCount > 0 && (
             <button
               type="button"
-              onClick={onStartBatch}
-              disabled={disabled}
-              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-blue-500/25 active:scale-95 transition-all"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Bọc khiên tất cả ({pendingCount})</span>
-            </button>
-          )}
-
-          {completedCount > 1 && !isProcessingBatch && (
-            <button
-              type="button"
-              onClick={onDownloadZip}
-              className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-600/25 active:scale-95 transition-all"
-            >
-              <Archive className="w-3.5 h-3.5" />
-              <span>Tải trọn bộ ZIP</span>
-            </button>
-          )}
-
-          {/* Native Label for Adding More Photos (100% reliable on iOS & Android) */}
-          <label
-            className={`p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs transition-colors flex items-center gap-1 cursor-pointer ${
-              disabled || isProcessingBatch ? 'opacity-50 pointer-events-none' : ''
-            }`}
-            title="Thêm ảnh khác vào hàng đợi"
-          >
-            <input
-              type="file"
-              accept="image/jpeg,image/png,image/webp,image/*"
-              multiple
-              className="sr-only"
               disabled={disabled || isProcessingBatch}
-              onChange={(e) => {
-                if (e.target.files && e.target.files.length > 0) {
-                  if (onAddFiles) {
-                    onAddFiles(Array.from(e.target.files));
-                  } else if (onAddMore) {
-                    onAddMore();
-                  }
-                  e.target.value = '';
-                }
-              }}
-            />
-            <Plus className="w-4 h-4" />
-            <span className="text-xs hidden sm:inline">Thêm ảnh</span>
-          </label>
+              onClick={onStartBatch}
+              className="px-3 py-1.5 rounded bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold text-xs flex items-center gap-1.5 transition-colors duration-150 active:translate-y-px disabled:opacity-50"
+            >
+              {isProcessingBatch ? (
+                <>
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                  <span className="whitespace-nowrap">Đang xử lý…</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5" />
+                  <span className="whitespace-nowrap">Xử lý tất cả ({pendingCount})</span>
+                </>
+              )}
+            </button>
+          )}
+
+          {doneCount > 1 && (
+            <button
+              type="button"
+              disabled={disabled || isProcessingBatch}
+              onClick={onDownloadZip}
+              className="px-3 py-1.5 rounded bg-[var(--color-paper-3)] border border-[var(--color-rule)] text-[var(--color-ink)] font-medium text-xs flex items-center gap-1.5 hover:border-[var(--color-muted)] transition-colors duration-150 active:translate-y-px"
+            >
+              <Archive className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+              <span className="whitespace-nowrap">Tải ZIP</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Dynamic Progress Indicator */}
+      {/* Progress bar */}
       {isProcessingBatch && (
-        <div className="space-y-2 bg-slate-900/95 p-3.5 rounded-2xl border border-blue-500/40 shadow-inner">
-          <div className="flex items-center justify-between text-xs font-semibold">
-            <span className="text-blue-400 flex items-center gap-2">
-              <Loader2 className="w-4 h-4 animate-spin text-blue-400" />
-              {batchProgress.message || 'Đang bọc khiên chống nén...'}
-            </span>
-            <span className="font-mono text-slate-200">
-              {batchProgress.current}/{batchProgress.total} ({batchProgress.percent}%)
-            </span>
+        <div className="space-y-1.5 animate-in fade-in duration-100 motion-reduce:animate-none">
+          <div className="flex justify-between text-[11px] text-[var(--color-muted)]">
+            <span>{batchProgress.message}</span>
+            <span className="font-mono tabular-nums text-[var(--color-accent)]">{batchProgress.percent}%</span>
           </div>
-          <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-[var(--color-paper)] rounded overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-pink-500 rounded-full transition-all duration-300"
+              className="h-full bg-[var(--color-accent)]"
               style={{ width: `${batchProgress.percent}%` }}
             />
           </div>
         </div>
       )}
 
-      {/* Horizontal Thumbnails Tray */}
-      <div className="flex items-center gap-3 overflow-x-auto pb-1.5 pt-1 scrollbar-thin">
-        {items.map((item, index) => {
-          const isSelected = activeIndex === index;
-          return (
-            <div
-              key={item.id}
-              onClick={() => onSelectIndex(index)}
-              className={`relative group shrink-0 w-[72px] h-[72px] sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 cursor-pointer transition-all ${
-                isSelected
-                  ? 'border-blue-500 ring-4 ring-blue-500/25 scale-105 shadow-xl shadow-blue-500/20'
-                  : 'border-slate-800 hover:border-slate-600 opacity-70 hover:opacity-100'
-              }`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.optUrl || item.origUrl}
-                alt={item.name}
-                className="w-full h-full object-cover"
-              />
+      {/* Thumbnails rail */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5">
+        {items.map((item, idx) => (
+          <div
+            key={item.id}
+            onClick={() => onSelectIndex(idx)}
+            className={`relative group shrink-0 w-16 h-16 rounded overflow-hidden cursor-pointer border transition-colors duration-150 ${
+              activeIndex === idx
+                ? 'border-[var(--color-accent)] ring-1 ring-[var(--color-accent)]'
+                : 'border-[var(--color-rule)] hover:border-[var(--color-muted)] opacity-70 hover:opacity-100'
+            }`}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.optUrl || item.origUrl}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
 
-              {/* Status Badge */}
-              <div className="absolute top-1.5 right-1.5 pointer-events-none">
-                {item.status === 'done' && (
-                  <div className="bg-emerald-500 text-slate-950 rounded-full p-1 shadow-lg">
-                    <CheckCircle2 className="w-3.5 h-3.5 font-bold" />
-                  </div>
-                )}
-                {item.status === 'processing' && (
-                  <div className="bg-blue-600 text-white rounded-full p-1 shadow-lg animate-spin">
-                    <Loader2 className="w-3.5 h-3.5" />
-                  </div>
-                )}
-                {item.status === 'error' && (
-                  <div className="bg-rose-500 text-white rounded-full p-1 shadow-lg">
-                    <AlertCircle className="w-3.5 h-3.5" />
-                  </div>
-                )}
-              </div>
-
-              {/* Number tag */}
-              <div className="absolute bottom-1.5 left-1.5 bg-slate-950/85 backdrop-blur-md px-2 py-0.5 rounded-md text-[10px] font-mono font-bold text-slate-200">
-                #{index + 1}
-              </div>
-
-              {/* Remove button on hover */}
-              {!isProcessingBatch && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onRemoveItem(item.id);
-                  }}
-                  className="absolute top-1.5 left-1.5 opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-rose-600 text-white hover:bg-rose-500 transition-opacity shadow-md"
-                  title="Xóa ảnh này"
-                >
-                  <Trash2 className="w-3 h-3" />
-                </button>
+            {/* Status indicator */}
+            <div className="absolute top-1 left-1">
+              {item.status === 'done' && (
+                <div className="w-4 h-4 rounded-full bg-[var(--color-paper-2)] border border-[var(--color-rule)] text-[var(--color-accent)] flex items-center justify-center">
+                  <Check className="w-2.5 h-2.5" />
+                </div>
+              )}
+              {item.status === 'processing' && (
+                <div className="w-4 h-4 rounded-full bg-[var(--color-paper-2)] border border-[var(--color-rule)] text-[var(--color-accent)] flex items-center justify-center">
+                  <RefreshCw className="w-2.5 h-2.5 animate-spin" />
+                </div>
+              )}
+              {item.status === 'error' && (
+                <div className="w-4 h-4 rounded-full bg-[var(--color-paper-2)] border border-[var(--color-rule)] text-red-400 flex items-center justify-center">
+                  <AlertCircle className="w-2.5 h-2.5" />
+                </div>
               )}
             </div>
-          );
-        })}
+
+            {/* Remove button */}
+            {!disabled && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemoveItem(item.id);
+                }}
+                className="absolute top-1 right-1 w-4 h-4 rounded bg-[var(--color-paper-2)] text-[var(--color-muted)] hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-100 flex items-center justify-center"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            )}
+          </div>
+        ))}
+
+        {/* Add more button */}
+        {!disabled && (
+          <label className="shrink-0 w-16 h-16 rounded border border-dashed border-[var(--color-rule)] hover:border-[var(--color-accent)] flex flex-col items-center justify-center text-[var(--color-muted)] hover:text-[var(--color-ink)] cursor-pointer transition-colors duration-150">
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/*"
+              multiple
+              className="sr-only"
+              onChange={(e) => {
+                if (e.target.files && e.target.files.length > 0) {
+                  onAddFiles(Array.from(e.target.files));
+                }
+                e.target.value = '';
+              }}
+            />
+            <Plus className="w-5 h-5 text-[var(--color-accent)]" />
+            <span className="text-[10px] mt-0.5 font-medium">Thêm</span>
+          </label>
+        )}
       </div>
     </div>
   );

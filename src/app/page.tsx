@@ -146,10 +146,10 @@ export default function Home() {
     []
   );
 
-  // 4. Handle New File Selection (Auto-Optimizes Immediately!)
+  // 4. Handle New File Selection
   const handleFilesSelected = (files: File[]) => {
     if (!files || files.length === 0) return;
-    const file = files[0]; // Active workflow focuses on single hero photo
+    const file = files[0];
     const origUrl = URL.createObjectURL(file);
 
     const newItem: ImageItem = {
@@ -224,7 +224,7 @@ export default function Home() {
           spread: 70,
           origin: { y: 0.8 },
         });
-        showToast('✓ Đã chia sẻ ảnh thành công!');
+        showToast('Đã chia sẻ ảnh thành công');
         return;
       } catch {
         // User dismissed share dialog
@@ -249,7 +249,7 @@ export default function Home() {
       spread: 60,
       origin: { y: 0.85 },
     });
-    showToast('✓ Đang tải ảnh về Album máy...');
+    showToast('Đang tải ảnh về Album máy...');
   };
 
   const handleCopyClipboard = async () => {
@@ -257,7 +257,7 @@ export default function Home() {
     const ok = await copyImageToClipboard(currentItem.optUrl);
     if (ok) {
       if ('vibrate' in navigator) navigator.vibrate(12);
-      showToast('✓ Đã sao chép ảnh vào Clipboard!');
+      showToast('Đã sao chép ảnh vào Clipboard');
     } else {
       showToast('Trình duyệt không hỗ trợ sao chép ảnh trực tiếp');
     }
@@ -278,7 +278,7 @@ export default function Home() {
   const presetShortName = PRESETS_INFO[platform]?.shortName || 'FB HD';
 
   return (
-    <div className="h-[100dvh] w-full overflow-hidden flex flex-col bg-[#0A0A0C] text-slate-100 select-none">
+    <div className="h-[100dvh] w-full overflow-hidden flex flex-col bg-[var(--color-paper)] text-[var(--color-ink)] select-none">
       {/* 1. TOP BAR: Brand & Smart Device Profile Pill */}
       <Header
         deviceProfile={deviceProfile}
@@ -326,9 +326,9 @@ export default function Home() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-none">
-          <div className="px-4 py-2 rounded-full bg-[#18181C]/95 text-white text-xs font-semibold shadow-2xl border border-blue-500/40 backdrop-blur-md flex items-center gap-2">
-            <Check className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 motion-reduce:animate-none pointer-events-none">
+          <div className="px-4 py-2 rounded bg-[var(--color-paper-2)] text-[var(--color-ink)] text-xs font-medium border border-[var(--color-rule)] flex items-center gap-2 shadow-md">
+            <Check className="w-3.5 h-3.5 text-[var(--color-accent)]" />
             <span>{toastMessage}</span>
           </div>
         </div>

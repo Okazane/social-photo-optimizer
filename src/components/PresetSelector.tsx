@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { PlatformKey, SharpenMode, FitStyle, PRESETS_INFO } from '@/types/optimizer';
-import { ShieldCheck, Crop, Smartphone, Square, User, Mountain, Layers } from 'lucide-react';
+import { ShieldCheck, Crop, User, Mountain, Layers } from 'lucide-react';
 
 interface PresetSelectorProps {
   platform: PlatformKey;
@@ -23,7 +23,6 @@ export default function PresetSelector({
   onFitStyleChange,
   disabled = false,
 }: PresetSelectorProps) {
-  // Determine current active platform tab
   const activeTab: 'facebook' | 'instagram' = PRESETS_INFO[platform]?.platform || 'facebook';
 
   const handleTabSwitch = (targetTab: 'facebook' | 'instagram') => {
@@ -37,29 +36,29 @@ export default function PresetSelector({
   return (
     <div className="w-full space-y-4">
       {/* 1. Nền tảng: Facebook vs Instagram Switcher */}
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-medium text-[var(--color-muted)]">
             Nền tảng tối ưu
           </label>
-          <span className="text-[11px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20 font-semibold">
+          <span className="text-[11px] font-mono tabular-nums text-[var(--color-accent)] bg-[var(--color-paper-2)] px-2 py-0.5 rounded border border-[var(--color-rule)]">
             {PRESETS_INFO[platform].dimensions}
           </span>
         </div>
 
         {/* Tab Switcher: Facebook & Instagram */}
-        <div className="grid grid-cols-2 p-1 rounded-2xl bg-slate-900 border border-slate-800">
+        <div className="grid grid-cols-2 p-1 rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)]">
           <button
             type="button"
             disabled={disabled}
             onClick={() => handleTabSwitch('facebook')}
-            className={`py-2 px-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
+            className={`py-2 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 ${
               activeTab === 'facebook'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 ring-1 ring-blue-400/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <ShieldCheck className="w-4 h-4 text-blue-300" />
+            <ShieldCheck className="w-4 h-4 text-[var(--color-accent)]" />
             <span>Facebook</span>
           </button>
 
@@ -67,140 +66,134 @@ export default function PresetSelector({
             type="button"
             disabled={disabled}
             onClick={() => handleTabSwitch('instagram')}
-            className={`py-2 px-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
+            className={`py-2 px-3 rounded text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-150 ${
               activeTab === 'instagram'
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg shadow-pink-500/25 ring-1 ring-pink-400/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold border border-[var(--color-rule)]'
+                : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <Crop className="w-4 h-4 text-pink-300" />
+            <Crop className="w-4 h-4 text-[var(--color-accent)]" />
             <span>Instagram</span>
           </button>
         </div>
 
-        {/* Presets List based on Active Tab */}
+        {/* Presets List */}
         {activeTab === 'facebook' ? (
-          <div className="grid grid-cols-3 gap-2 animate-in fade-in duration-200">
-            {/* Facebook HD */}
+          <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_hd')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'fb_hd'
-                  ? 'bg-blue-600/20 border-blue-500 text-white ring-1 ring-blue-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-bold bg-blue-500 text-white">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-medium bg-[var(--color-accent)] text-[var(--color-accent-ink)]">
                   Max 2048px
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Facebook HD</div>
-              <div className="text-[10px] text-slate-400">Giữ nguyên khung</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Facebook HD</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Giữ nguyên khung</div>
             </button>
 
-            {/* Facebook Portrait 4:5 */}
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_portrait')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'fb_portrait'
-                  ? 'bg-blue-600/20 border-blue-500 text-white ring-1 ring-blue-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-800 text-slate-400">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
                   4:5
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Facebook Dọc</div>
-              <div className="text-[10px] text-slate-400">Tối đa newfeed</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Facebook Dọc</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Tối đa newfeed</div>
             </button>
 
-            {/* Facebook Story */}
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('fb_story')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'fb_story'
-                  ? 'bg-blue-600/20 border-blue-500 text-white ring-1 ring-blue-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-800 text-slate-400">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
                   9:16
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Facebook Story</div>
-              <div className="text-[10px] text-slate-400">Màn hình dọc</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Facebook Story</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Màn hình dọc</div>
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-2 animate-in fade-in duration-200">
-            {/* Instagram Portrait 4:5 */}
+          <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_portrait')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'ig_portrait'
-                  ? 'bg-pink-600/20 border-pink-500 text-white ring-1 ring-pink-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-pink-500 text-white font-bold">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-medium">
                   4:5
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Instagram Dọc</div>
-              <div className="text-[10px] text-slate-400">Chuẩn vàng Feed</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Instagram Dọc</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Chuẩn vàng Feed</div>
             </button>
 
-            {/* Instagram Square 1:1 */}
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_square')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'ig_square'
-                  ? 'bg-pink-600/20 border-pink-500 text-white ring-1 ring-pink-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-800 text-slate-400">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
                   1:1
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Vuông Cổ Điển</div>
-              <div className="text-[10px] text-slate-400">Lưới ảnh feed</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Vuông Cổ Điển</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Lưới ảnh feed</div>
             </button>
 
-            {/* Instagram Story / Reels */}
             <button
               type="button"
               disabled={disabled}
               onClick={() => onPlatformChange('ig_story')}
-              className={`p-3 rounded-2xl text-left border transition-all ${
+              className={`p-3 rounded text-left border transition-colors duration-150 ${
                 platform === 'ig_story'
-                  ? 'bg-pink-600/20 border-pink-500 text-white ring-1 ring-pink-500/40'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono bg-slate-800 text-slate-400">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono tabular-nums bg-[var(--color-paper)] text-[var(--color-muted)]">
                   9:16
                 </span>
               </div>
-              <div className="font-bold text-xs sm:text-sm">Story / Reels</div>
-              <div className="text-[10px] text-slate-400">Toàn màn hình</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Story / Reels</div>
+              <div className="text-[10px] text-[var(--color-muted)]">Toàn màn hình</div>
             </button>
           </div>
         )}
@@ -208,57 +201,55 @@ export default function PresetSelector({
 
       {/* 2. Chọn Chế độ làm nét */}
       <div className="space-y-2">
-        <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+        <label className="text-xs font-medium text-[var(--color-muted)]">
           Chế độ làm nét
         </label>
 
         <div className="grid grid-cols-2 gap-2">
-          {/* Chân dung */}
           <button
             type="button"
             disabled={disabled}
             onClick={() => onModeChange('portrait')}
-            className={`p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all ${
+            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 ${
               mode === 'portrait'
-                ? 'bg-emerald-600/20 border-emerald-500 text-white ring-1 ring-emerald-500/40'
-                : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <div className={`p-2 rounded-xl shrink-0 ${mode === 'portrait' ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-400'}`}>
+            <div className={`p-2 rounded shrink-0 ${mode === 'portrait' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper)] text-[var(--color-muted)]'}`}>
               <User className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-bold text-xs sm:text-sm">Chân Dung / Đời Thường</div>
-              <div className="text-[10px] text-emerald-400 font-medium">Chi tiết chân dung</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Chân dung</div>
+              <div className="text-[10px] text-[var(--color-muted)] font-medium">Chi tiết chân dung</div>
             </div>
           </button>
 
-          {/* Phong cảnh */}
           <button
             type="button"
             disabled={disabled}
             onClick={() => onModeChange('landscape')}
-            className={`p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all ${
+            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 ${
               mode === 'landscape'
-                ? 'bg-amber-600/20 border-amber-500 text-white ring-1 ring-amber-500/40'
-                : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-300'
+                ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
+                : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <div className={`p-2 rounded-xl shrink-0 ${mode === 'landscape' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-400'}`}>
+            <div className={`p-2 rounded shrink-0 ${mode === 'landscape' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper)] text-[var(--color-muted)]'}`}>
               <Mountain className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-bold text-xs sm:text-sm">Phong Cảnh / Đồ Ăn</div>
-              <div className="text-[10px] text-amber-400 font-medium">Nét sâu chi tiết</div>
+              <div className="font-semibold text-xs sm:text-sm text-[var(--color-ink)]">Phong cảnh</div>
+              <div className="text-[10px] text-[var(--color-muted)] font-medium">Chi tiết phong cảnh</div>
             </div>
           </button>
         </div>
       </div>
 
-      {/* 3. Tùy chọn Viền (chỉ hiện khi chọn khung cố định khác fb_hd) */}
+      {/* 3. Tùy chọn Viền */}
       {platform !== 'fb_hd' && (
         <div className="space-y-2">
-          <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-medium text-[var(--color-muted)]">
             Khung viền ({PRESETS_INFO[platform].ratio})
           </label>
 
@@ -267,42 +258,42 @@ export default function PresetSelector({
               type="button"
               disabled={disabled}
               onClick={() => onFitStyleChange('pad_white')}
-              className={`p-2.5 rounded-xl border text-center transition-all ${
+              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
                 fitStyle === 'pad_white' || fitStyle === 'original'
-                  ? 'bg-violet-600/25 border-violet-500 text-white font-bold ring-1 ring-violet-500/30'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-400'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="w-3.5 h-3.5 rounded-full bg-white mx-auto mb-1 border border-slate-400" />
-              <div className="text-xs font-semibold">Viền Trắng</div>
+              <div className="text-xs font-medium">Viền Trắng</div>
             </button>
 
             <button
               type="button"
               disabled={disabled}
               onClick={() => onFitStyleChange('pad_black')}
-              className={`p-2.5 rounded-xl border text-center transition-all ${
+              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
                 fitStyle === 'pad_black'
-                  ? 'bg-violet-600/25 border-violet-500 text-white font-bold ring-1 ring-violet-500/30'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-400'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
-              <div className="w-3.5 h-3.5 rounded-full bg-slate-950 mx-auto mb-1 border border-slate-700" />
-              <div className="text-xs font-semibold">Viền Đen</div>
+              <div className="w-3.5 h-3.5 rounded-full bg-black mx-auto mb-1 border border-[var(--color-rule)]" />
+              <div className="text-xs font-medium">Viền Đen</div>
             </button>
 
             <button
               type="button"
               disabled={disabled}
               onClick={() => onFitStyleChange('cover')}
-              className={`p-2.5 rounded-xl border text-center transition-all ${
+              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
                 fitStyle === 'cover'
-                  ? 'bg-violet-600/25 border-violet-500 text-white font-bold ring-1 ring-violet-500/30'
-                  : 'bg-slate-900/60 hover:bg-slate-800 border-slate-800 text-slate-400'
+                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
+                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
-              <Layers className="w-3.5 h-3.5 mx-auto mb-1 text-slate-300" />
-              <div className="text-xs font-semibold">Cắt Vừa Khung</div>
+              <Layers className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--color-muted)]" />
+              <div className="text-xs font-medium">Cắt Vừa Khung</div>
             </button>
           </div>
         </div>

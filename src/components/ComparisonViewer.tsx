@@ -152,20 +152,20 @@ export default function ComparisonViewer({
 
   const showLoupe = isLoupeActive || isHoldingCanvas;
 
-  // Calculate loupe center: position 65px above finger so thumb does not cover magnified view
+  // Calculate loupe center: position 70px above finger
   const loupeRadius = 68; // 136px diameter
   const loupeCenterY = Math.max(loupeRadius + 10, touchPos.y - 70);
   const loupeCenterX = Math.max(loupeRadius + 10, Math.min(containerSize.width - loupeRadius - 10, touchPos.x));
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center select-none relative p-1.5 sm:p-3 overflow-hidden">
+    <div className="w-full h-full flex flex-col items-center justify-center select-none relative p-2 sm:p-3 overflow-hidden darkroom-grain">
       {/* Visual Canvas Container */}
       <div
         ref={containerRef}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        className="relative w-full h-full max-h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0A0A0C] flex items-center justify-center touch-none cursor-ew-resize border border-white/[0.06] shadow-2xl"
+        className="relative w-full h-full max-h-full rounded overflow-hidden bg-[var(--color-paper)] flex items-center justify-center touch-none cursor-ew-resize border border-[var(--color-rule)]"
       >
         {/* Layer 1: Optimized Image (Right side) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -193,20 +193,20 @@ export default function ComparisonViewer({
         </div>
 
         {/* Badges: Left (Original) & Right (Shielded) */}
-        <div className="absolute top-2.5 left-2.5 pointer-events-none z-10">
-          <span className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-[#0A0A0C]/85 text-slate-300 backdrop-blur-md border border-white/10 shadow-lg">
+        <div className="absolute top-3 left-3 pointer-events-none z-10">
+          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-2)] text-[var(--color-muted)] border border-[var(--color-rule)]">
             Ảnh Gốc
           </span>
         </div>
-        <div className="absolute top-2.5 right-2.5 pointer-events-none z-10">
-          <span className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-blue-600/90 text-white backdrop-blur-md shadow-lg border border-blue-400/40 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-amber-300" />
+        <div className="absolute top-3 right-3 pointer-events-none z-10">
+          <span className="px-2.5 py-1 rounded text-[11px] font-medium bg-[var(--color-paper-2)] text-[var(--color-accent)] border border-[var(--color-rule)] flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
             <span>Đã Bọc Khiên</span>
           </span>
         </div>
 
         {/* Quick Tools on Canvas (Toggle Loupe & Hold Original) */}
-        <div className="absolute top-2.5 left-1/2 -translate-x-1/2 pointer-events-auto z-15 flex items-center gap-1.5">
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 pointer-events-auto z-15 flex items-center gap-1.5">
           <button
             type="button"
             onClick={(e) => {
@@ -214,14 +214,14 @@ export default function ComparisonViewer({
               if ('vibrate' in navigator) navigator.vibrate(8);
               setIsLoupeActive(!isLoupeActive);
             }}
-            className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] font-bold flex items-center gap-1 border transition-all ${
+            className={`px-2.5 py-1 rounded text-[11px] font-medium flex items-center gap-1.5 border transition-colors duration-150 ${
               isLoupeActive
-                ? 'bg-blue-600 text-white border-blue-400 shadow-md ring-1 ring-blue-300/40'
-                : 'bg-[#18181C]/80 text-slate-400 hover:text-white border-white/10 backdrop-blur-md'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold'
+                : 'bg-[var(--color-paper-2)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)]'
             }`}
             title="Kính lúp zoom 250% (Phím Z)"
           >
-            <ZoomIn className="w-3 h-3" />
+            <ZoomIn className="w-3.5 h-3.5" />
             <span>250%</span>
           </button>
 
@@ -237,16 +237,15 @@ export default function ComparisonViewer({
               setIsPressingOriginal(false);
             }}
             onPointerLeave={() => setIsPressingOriginal(false)}
-            className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] font-bold flex items-center gap-1 border transition-all ${
+            className={`px-2.5 py-1 rounded text-[11px] font-medium flex items-center gap-1.5 border transition-colors duration-150 ${
               isPressingOriginal
-                ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-md'
-                : 'bg-[#18181C]/80 text-slate-400 hover:text-white border-white/10 backdrop-blur-md'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] border-[var(--color-accent)] font-semibold'
+                : 'bg-[var(--color-paper-2)] text-[var(--color-muted)] hover:text-[var(--color-ink)] border-[var(--color-rule)]'
             }`}
             title="Giữ để xem ảnh gốc (Phím Space)"
           >
-            <Eye className="w-3 h-3" />
-            <span className="hidden sm:inline">Giữ xem</span>
-            <span>Gốc</span>
+            <Eye className="w-3.5 h-3.5" />
+            <span>Giữ xem Gốc</span>
           </button>
         </div>
 
@@ -256,22 +255,22 @@ export default function ComparisonViewer({
             className="absolute top-0 bottom-0 z-20 pointer-events-none transition-none"
             style={{ left: `${sliderPosition}%` }}
           >
-            <div className="absolute top-0 bottom-0 -left-[1.5px] w-[3px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
+            <div className="absolute top-0 bottom-0 -left-[1px] w-[2px] bg-[var(--color-ink)]" />
 
             <div
-              className={`absolute top-1/2 -left-4 sm:-left-5 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-slate-900 flex items-center justify-center slider-handle-white pointer-events-auto cursor-grab active:cursor-grabbing hover:scale-110 active:scale-95 transition-transform ${
-                isDraggingSlider ? 'scale-110 ring-4 ring-blue-500/50' : ''
+              className={`absolute top-1/2 -left-4 sm:-left-5 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--color-ink)] text-[var(--color-paper)] flex items-center justify-center slider-handle-precision pointer-events-auto cursor-grab active:cursor-grabbing hover:scale-105 active:scale-95 transition-transform duration-100 ${
+                isDraggingSlider ? 'scale-105' : ''
               }`}
             >
-              <MoveHorizontal className="w-4 h-4 sm:w-5 sm:h-5 text-slate-900" />
+              <MoveHorizontal className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--color-paper)]" />
             </div>
           </div>
         )}
 
-        {/* 250% Touch-and-Hold Loupe (Offset -60px above contact point) */}
+        {/* 250% Touch-and-Hold Loupe (Offset -70px above contact point) */}
         {showLoupe && (
           <div
-            className="absolute z-30 pointer-events-none w-34 h-34 sm:w-44 sm:h-44 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white loupe-ring overflow-hidden bg-[#0A0A0C]"
+            className="absolute z-30 pointer-events-none w-34 h-34 sm:w-44 sm:h-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--color-ink)] loupe-ring overflow-hidden bg-[var(--color-paper)]"
             style={{
               left: `${loupeCenterX}px`,
               top: `${loupeCenterY}px`,
@@ -293,14 +292,14 @@ export default function ComparisonViewer({
               />
             </div>
 
-            {/* Precision Crosshair */}
+            {/* Precision Hairline Crosshair */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-2.5 h-2.5 border-t border-l border-white/80 -translate-x-0.5 -translate-y-0.5" />
-              <div className="w-2.5 h-2.5 border-b border-r border-white/80 translate-x-0.5 translate-y-0.5" />
+              <div className="w-3 h-3 border-t border-l border-[var(--color-ink)] -translate-x-0.5 -translate-y-0.5 opacity-80" />
+              <div className="w-3 h-3 border-b border-r border-[var(--color-ink)] translate-x-0.5 translate-y-0.5 opacity-80" />
             </div>
 
             {/* Loupe Mode Pill */}
-            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 bg-[#0A0A0C]/90 text-blue-400 text-[9px] font-mono font-bold px-2 py-0.2 rounded-full border border-blue-500/40 whitespace-nowrap shadow-md">
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[var(--color-paper-2)] text-[var(--color-accent)] text-[10px] font-mono font-medium px-2 py-0.5 rounded border border-[var(--color-rule)] whitespace-nowrap shadow">
               2.5× {isPressingOriginal ? 'Gốc' : 'Nét L*'}
             </div>
           </div>
@@ -308,23 +307,23 @@ export default function ComparisonViewer({
 
         {/* Processing Spinner Overlay */}
         {isProcessing && (
-          <div className="absolute inset-0 bg-[#0A0A0C]/70 backdrop-blur-sm z-40 flex flex-col items-center justify-center text-white gap-2 animate-in fade-in duration-150">
-            <RefreshCw className="w-7 h-7 text-blue-400 animate-spin" />
-            <span className="text-xs font-semibold text-slate-200">Đang tối ưu &amp; làm nét L*...</span>
+          <div className="absolute inset-0 bg-[var(--color-paper)]/75 z-40 flex flex-col items-center justify-center text-[var(--color-ink)] gap-2 animate-in fade-in duration-100 motion-reduce:animate-none">
+            <RefreshCw className="w-6 h-6 text-[var(--color-accent)] animate-spin" />
+            <span className="text-xs font-medium text-[var(--color-muted)]">Đang xử lý &amp; làm nét L*...</span>
           </div>
         )}
 
         {/* Technical Specs Leica Pill (At Bottom of Workspace) */}
-        <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none max-w-[94%]">
-          <div className="pill-glass px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono text-slate-300 shadow-xl flex items-center gap-1.5 whitespace-nowrap overflow-hidden text-ellipsis border border-white/10">
-            <span className="text-slate-400">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none max-w-[94%]">
+          <div className="bg-[var(--color-paper-2)] border border-[var(--color-rule)] px-3 py-1 rounded text-xs font-mono tabular-nums text-[var(--color-ink)] flex items-center gap-2 whitespace-nowrap overflow-hidden text-ellipsis shadow-lg">
+            <span className="text-[var(--color-muted)]">
               Gốc: {origDimensions ? `${origDimensions.width}×${origDimensions.height}` : '...'} ({formatBytes(origSize)})
             </span>
-            <span className="text-blue-400 font-bold">→</span>
-            <span className="text-white font-semibold">
+            <span className="text-[var(--color-accent)] font-semibold">→</span>
+            <span className="text-[var(--color-ink)] font-medium">
               {presetShortName}: {optDimensions ? `${optDimensions.width}×${optDimensions.height}` : '...'} ({formatBytes(optSize)})
             </span>
-            <span className="hidden sm:inline text-blue-400/80">| Q92 • 4:4:4</span>
+            <span className="hidden sm:inline text-[var(--color-muted)]">| Q92 4:4:4</span>
           </div>
         </div>
       </div>

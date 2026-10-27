@@ -1,9 +1,46 @@
+/* Hallmark · theme: Darkroom (by request) · genre: atmospheric · posture: restrained · shape: app screen */
 @import "tailwindcss";
 
+:root {
+  --color-paper: oklch(12.5% 0.008 55);
+  --color-paper-2: oklch(16% 0.009 55);
+  --color-paper-3: oklch(20.5% 0.01 55);
+  --color-ink: oklch(92% 0.012 78);
+  --color-ink-2: oklch(80% 0.012 75);
+  --color-muted: oklch(64% 0.012 65);
+  --color-rule: oklch(29% 0.01 55);
+  --color-accent: oklch(73% 0.15 58);
+  --color-accent-deep: oklch(50% 0.11 52);
+  --color-accent-ink: oklch(12.5% 0.008 55);
+  --color-focus: oklch(73% 0.15 58);
+  --font-body: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --shadow-loupe: 0 0 0 1.5px var(--color-ink), 0 20px 40px oklch(0% 0 0 / 85%);
+  --shadow-handle: 0 0 0 1.5px var(--color-ink), 0 4px 14px oklch(0% 0 0 / 60%);
+  --grain: 0.05;
+}
+
 @layer base {
-  * {
-    border-color: rgba(255, 255, 255, 0.08);
+  html,
+  body {
+    overflow-x: clip;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
   }
+
+  * {
+    border-color: var(--color-rule);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 /* Custom scrollbars */
@@ -12,37 +49,41 @@
   height: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(10, 10, 12, 0.8);
+  background: var(--color-paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.3);
-  border-radius: 9999px;
+  background: var(--color-rule);
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.6);
+  background: var(--color-muted);
 }
 
-/* Darkroom Studio Glass Helpers */
-.dock-glass {
-  background: rgba(24, 24, 28, 0.90);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+/* Darkroom Grain Overlay */
+.darkroom-grain {
+  position: relative;
+  isolation: isolate;
+}
+.darkroom-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0 / 200px 200px;
 }
 
-.pill-glass {
-  background: rgba(24, 24, 28, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Loupe 250% ring & crosshair */
+/* Optical Loupe Ring */
 .loupe-ring {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95), 0 20px 40px rgba(0, 0, 0, 0.8);
+  box-shadow: var(--shadow-loupe);
 }
 
-/* Slider comparison styling */
-.slider-handle-white {
-  box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 1), 0 0 20px rgba(59, 130, 246, 0.6), 0 10px 25px -5px rgba(0, 0, 0, 0.7);
+/* Slider Precision Handle */
+.slider-handle-precision {
+  box-shadow: var(--shadow-handle);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 35%, transparent);
 }

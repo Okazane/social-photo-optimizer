@@ -45,9 +45,9 @@ export default function PwaInstallPrompt() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-50 animate-in fade-in slide-in-from-bottom-5 duration-200 motion-reduce:animate-none">
-      <div className="p-3.5 rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)] flex items-center justify-between gap-3">
+      <div className="p-3.5 rounded bg-[var(--color-paper-hi)] border border-[var(--color-rule-2)] flex items-center justify-between gap-3 shadow-md">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded bg-[var(--color-paper-3)] border border-[var(--color-rule)] flex items-center justify-center text-[var(--color-accent)] shrink-0">
+          <div className="w-9 h-9 rounded bg-[var(--color-paper-2)] border border-[var(--color-rule)] flex items-center justify-center text-[var(--color-accent)] shrink-0">
             <Smartphone className="w-4 h-4" />
           </div>
           <div>

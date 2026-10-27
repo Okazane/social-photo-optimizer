@@ -142,10 +142,6 @@ export default function Header({
                     : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-2)]'
                 }`}
               >
-                    ? 'bg-[var(--color-paper-3)] text-[var(--color-accent)] font-semibold'
-                    : 'text-[var(--color-ink)] hover:bg-[var(--color-paper-3)]'
-                }`}
-              >
                 <div className="flex items-center gap-2">
                   <Monitor className="w-3.5 h-3.5 text-[var(--color-muted)]" />
                   <div>

@@ -327,7 +327,7 @@ export default function Home() {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 motion-reduce:animate-none pointer-events-none">
-          <div className="px-4 py-2 rounded bg-[var(--color-paper-2)] text-[var(--color-ink)] text-xs font-medium border border-[var(--color-rule)] flex items-center gap-2 shadow-md">
+          <div className="px-4 py-2 rounded bg-[var(--color-paper-hi)] text-[var(--color-ink)] text-xs font-medium border border-[var(--color-rule-2)] flex items-center gap-2 shadow-md">
             <Check className="w-3.5 h-3.5 text-[var(--color-accent)]" />
             <span>{toastMessage}</span>
           </div>

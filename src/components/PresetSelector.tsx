@@ -210,13 +210,13 @@ export default function PresetSelector({
             type="button"
             disabled={disabled}
             onClick={() => onModeChange('portrait')}
-            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 ${
+            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 shadow-xs ${
               mode === 'portrait'
-                ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <div className={`p-2 rounded shrink-0 ${mode === 'portrait' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper)] text-[var(--color-muted)]'}`}>
+            <div className={`p-2 rounded shrink-0 ${mode === 'portrait' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper-2)] text-[var(--color-muted)]'}`}>
               <User className="w-4 h-4" />
             </div>
             <div>
@@ -229,13 +229,13 @@ export default function PresetSelector({
             type="button"
             disabled={disabled}
             onClick={() => onModeChange('landscape')}
-            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 ${
+            className={`p-3 rounded border text-left flex items-center gap-2.5 transition-colors duration-150 shadow-xs ${
               mode === 'landscape'
-                ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-ink)]'
-                : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-ink)]'
+                : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
             }`}
           >
-            <div className={`p-2 rounded shrink-0 ${mode === 'landscape' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper)] text-[var(--color-muted)]'}`}>
+            <div className={`p-2 rounded shrink-0 ${mode === 'landscape' ? 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold' : 'bg-[var(--color-paper-2)] text-[var(--color-muted)]'}`}>
               <Mountain className="w-4 h-4" />
             </div>
             <div>
@@ -246,54 +246,72 @@ export default function PresetSelector({
         </div>
       </div>
 
-      {/* 3. Tùy chọn Viền */}
+      {/* 3. Tùy chọn Viền (Thứ tự ưu tiên: 1. Cắt đầy -> 2. Viền đen -> 3. Viền trắng -> 4. Nền mờ) */}
       {platform !== 'fb_hd' && (
         <div className="space-y-2">
           <label className="text-xs font-medium text-[var(--color-muted)]">
             Khung viền ({PRESETS_INFO[platform].ratio})
           </label>
 
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-1.5">
+            {/* 1. Cắt đầy */}
             <button
               type="button"
               disabled={disabled}
-              onClick={() => onFitStyleChange('pad_white')}
-              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
-                fitStyle === 'pad_white' || fitStyle === 'original'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+              onClick={() => onFitStyleChange('cover')}
+              className={`p-2 rounded border text-center transition-colors duration-150 shadow-xs ${
+                fitStyle === 'cover'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-accent)] font-semibold'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
-              <div className="w-3.5 h-3.5 rounded-full bg-white mx-auto mb-1 border border-slate-400" />
-              <div className="text-xs font-medium">Viền Trắng</div>
+              <Layers className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--color-accent)]" />
+              <div className="text-xs font-medium">Cắt đầy</div>
             </button>
 
+            {/* 2. Viền đen */}
             <button
               type="button"
               disabled={disabled}
               onClick={() => onFitStyleChange('pad_black')}
-              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
+              className={`p-2 rounded border text-center transition-colors duration-150 shadow-xs ${
                 fitStyle === 'pad_black'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-accent)] font-semibold'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
               <div className="w-3.5 h-3.5 rounded-full bg-black mx-auto mb-1 border border-[var(--color-rule)]" />
               <div className="text-xs font-medium">Viền Đen</div>
             </button>
 
+            {/* 3. Viền trắng */}
             <button
               type="button"
               disabled={disabled}
-              onClick={() => onFitStyleChange('cover')}
-              className={`p-2.5 rounded border text-center transition-colors duration-150 ${
-                fitStyle === 'cover'
-                  ? 'bg-[var(--color-paper-3)] border-[var(--color-accent)] text-[var(--color-accent)] font-medium'
-                  : 'bg-[var(--color-paper-2)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+              onClick={() => onFitStyleChange('pad_white')}
+              className={`p-2 rounded border text-center transition-colors duration-150 shadow-xs ${
+                fitStyle === 'pad_white' || fitStyle === 'original'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-accent)] font-semibold'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
               }`}
             >
-              <Layers className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--color-muted)]" />
-              <div className="text-xs font-medium">Cắt Vừa Khung</div>
+              <div className="w-3.5 h-3.5 rounded-full bg-white mx-auto mb-1 border border-slate-400" />
+              <div className="text-xs font-medium">Viền Trắng</div>
+            </button>
+
+            {/* 4. Nền mờ */}
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={() => onFitStyleChange('pad_blur')}
+              className={`p-2 rounded border text-center transition-colors duration-150 shadow-xs ${
+                fitStyle === 'pad_blur'
+                  ? 'bg-[var(--color-paper-hi)] border-[var(--color-accent)] ring-1 ring-[var(--color-accent)] text-[var(--color-accent)] font-semibold'
+                  : 'bg-[var(--color-paper-hi)] border-[var(--color-rule)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
+              }`}
+            >
+              <div className="w-3.5 h-3.5 rounded-full bg-[var(--color-paper-2)] border border-dashed border-[var(--color-rule-2)] mx-auto mb-1" />
+              <div className="text-xs font-medium">Nền Mờ</div>
             </button>
           </div>
         </div>
